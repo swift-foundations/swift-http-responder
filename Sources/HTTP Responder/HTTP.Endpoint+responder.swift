@@ -8,6 +8,13 @@ import Serializer_Primitive
 extension HTTP.Endpoint {
 
     public func responder<Output, DomainFailure: Swift.Error>(
+        using service: @escaping (RequestCoder.Output) async throws(DomainFailure) -> Output
+    ) -> HTTP.Responder<HTTP.Coding.Error>
+    where ResponseCoder.Output == Either<DomainFailure, Output> {
+        responder(using: .init(run: service))
+    }
+
+    public func responder<Output, DomainFailure: Swift.Error>(
         using service: Client::Client<RequestCoder.Output, Output, DomainFailure>
     ) -> HTTP.Responder<HTTP.Coding.Error>
     where ResponseCoder.Output == Either<DomainFailure, Output> {
