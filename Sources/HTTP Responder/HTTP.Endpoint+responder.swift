@@ -8,17 +8,20 @@ import Serializer_Primitive
 extension HTTP.Endpoint {
 
     public func responder<Output, DomainFailure: Swift.Error>(
-        using service: Client<RequestCoder.Output, Output, DomainFailure>
+        using service: Client::Client<RequestCoder.Output, Output, DomainFailure>
     ) -> HTTP.Responder<HTTP.Coding.Error>
     where ResponseCoder.Output == Either<DomainFailure, Output> {
         .init(
             run: { request throws(HTTP.Coding.Error) in
                 var buffered = Optional(request)
                 let input = try self.request.parse(&buffered)
+                guard case nil = buffered else {
+                    throw .request
+                }
                 let outcome: Either<DomainFailure, Output>
 
                 do throws(DomainFailure) {
-                    outcome = .right(try await service.run(input))
+                    outcome = .right(try await service(input))
                 } catch {
                     outcome = .left(error)
                 }
