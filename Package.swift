@@ -14,6 +14,8 @@ let package = Package(
         .package(url: "https://github.com/swift-foundations/swift-client.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-http-coder.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-http.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-byte-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-coder-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-either-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-parser-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-serializer-primitives.git", branch: "main"),
@@ -23,9 +25,23 @@ let package = Package(
             name: "HTTP Responder",
             dependencies: [
                 .product(name: "Client", package: "swift-client"),
+                .product(name: "Coder Primitive", package: "swift-coder-primitives"),
                 .product(name: "HTTP Coder", package: "swift-http-coder"),
                 .product(name: "HTTP", package: "swift-http"),
                 .product(name: "Either Primitives", package: "swift-either-primitives"),
+                .product(name: "Parser Primitive", package: "swift-parser-primitives"),
+                .product(name: "Serializer Primitive", package: "swift-serializer-primitives"),
+            ]
+        ),
+        .testTarget(
+            name: "HTTP Responder Tests",
+            dependencies: [
+                "HTTP Responder",
+                .product(name: "Byte Primitive", package: "swift-byte-primitives"),
+                .product(name: "Coder Primitive", package: "swift-coder-primitives"),
+                .product(name: "Either Primitives", package: "swift-either-primitives"),
+                .product(name: "HTTP", package: "swift-http"),
+                .product(name: "HTTP Coder", package: "swift-http-coder"),
                 .product(name: "Parser Primitive", package: "swift-parser-primitives"),
                 .product(name: "Serializer Primitive", package: "swift-serializer-primitives"),
             ]
