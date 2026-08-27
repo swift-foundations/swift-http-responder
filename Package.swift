@@ -11,31 +11,36 @@ let package = Package(
         .library(name: "HTTP Responder", targets: ["HTTP Responder"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/swift-foundations/swift-call.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-client.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-http-coder.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-http-router.git", branch: "main"),
         .package(url: "https://github.com/swift-foundations/swift-http.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-coder-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-either-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-ietf/swift-rfc-9110.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-serializer-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-optic-primitives.git", branch: "main"),
     ],
     targets: [
         .target(
             name: "HTTP Responder",
             dependencies: [
+                .product(name: "Call", package: "swift-call"),
                 .product(name: "Client", package: "swift-client"),
-                .product(name: "Coder Primitive", package: "swift-coder-primitives"),
                 .product(name: "HTTP Coder", package: "swift-http-coder"),
-                .product(name: "HTTP Router", package: "swift-http-router"),
                 .product(name: "HTTP", package: "swift-http"),
-                .product(name: "Either Primitives", package: "swift-either-primitives"),
+                .product(name: "RFC 9110", package: "swift-rfc-9110"),
+                .product(name: "Serializer Primitive", package: "swift-serializer-primitives"),
             ]
         ),
         .testTarget(
             name: "HTTP Responder Tests",
             dependencies: [
                 "HTTP Responder",
-                .product(name: "Coder Primitive", package: "swift-coder-primitives"),
+                .product(name: "Call", package: "swift-call"),
+                .product(name: "Client", package: "swift-client"),
                 .product(name: "HTTP", package: "swift-http"),
+                .product(name: "HTTP Coder", package: "swift-http-coder"),
+                .product(name: "RFC 9110", package: "swift-rfc-9110"),
+                .product(name: "Optic Primitives", package: "swift-optic-primitives"),
             ]
         ),
     ],
