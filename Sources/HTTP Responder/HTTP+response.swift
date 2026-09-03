@@ -3,7 +3,7 @@ public import Client
 public import HTTP
 public import HTTP_Coder
 public import RFC_9110
-import Serializer_Primitive
+import Serializer
 
 extension HTTP {
     public static func response<Domain, Operation, Response, Content>(

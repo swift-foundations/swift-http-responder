@@ -3,7 +3,7 @@ import Client
 import HTTP
 import HTTP_Coder
 import HTTP_Responder
-import Optic_Primitives
+import Optic
 import RFC_9110
 import Testing
 
@@ -60,7 +60,7 @@ extension Fixture.Domain.Call: Call_Algebra.Call.Singleton {
 
     static var branches: Branches { .init() }
 
-    static var value: Optic.Prism<Self, Operation.Input> {
+    static var value: Optic<Self, Self, Operation.Input, Operation.Input>.Prism {
         branches.respond.prism
     }
 }

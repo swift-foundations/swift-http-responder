@@ -11,13 +11,13 @@ let package = Package(
         .library(name: "HTTP Responder", targets: ["HTTP Responder"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-foundations/swift-call.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-client.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-http-coder.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-http.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-call.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-client.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-http-coder.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-http.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-9110.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-serializer-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-optic-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-serializer.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-optic.git", branch: "main"),
     ],
     targets: [
         .target(
@@ -28,7 +28,7 @@ let package = Package(
                 .product(name: "HTTP Coder", package: "swift-http-coder"),
                 .product(name: "HTTP", package: "swift-http"),
                 .product(name: "RFC 9110", package: "swift-rfc-9110"),
-                .product(name: "Serializer Primitive", package: "swift-serializer-primitives"),
+                .product(name: "Serializer", package: "swift-serializer"),
             ]
         ),
         .testTarget(
@@ -40,7 +40,7 @@ let package = Package(
                 .product(name: "HTTP", package: "swift-http"),
                 .product(name: "HTTP Coder", package: "swift-http-coder"),
                 .product(name: "RFC 9110", package: "swift-rfc-9110"),
-                .product(name: "Optic Primitives", package: "swift-optic-primitives"),
+                .product(name: "Optic", package: "swift-optic"),
             ]
         ),
     ],
